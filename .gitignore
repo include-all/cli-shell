@@ -1,0 +1,7 @@
+# 依赖
+node_modules/
+
+# editor
+.DS_Store
+.idea
+.vscode
