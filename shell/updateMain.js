@@ -33,10 +33,27 @@ module.exports = async () => {
   console.log(`===========npm build end=============`)
 
 
+  // 删除dist
+  console.log('===========begin delete old source===============')
+  execa.commandSync('rm -rf /home/www/qiankun/main/*', {
+    cwd: projectPath
+  })
+  console.log('===========delete old source end===============')
+
+
+  // 刷新dist
+  console.log('===========ls old source end===============')
+  const lsMainDist = execa.commandSync('ls ./dist', {
+    cwd: projectPath
+  })
+  console.log(lsMainDist.stdout)
+  console.log('===========ls old source end===============')
+
+
   // 移动dist文件
   console.log(`===========begin move dist=============`)
-  const cpMainDist = execa.commandSync('cp -r ./dist /home/www/qiankun/subapp/app-vue2', {
-    cwd: projectPath
+  const cpMainDist = execa.commandSync('cp -rf . /home/www/qiankun/main', {
+    cwd: path.join(projectPath, './dist')
   })
   console.log(cpMainDist.stdout)
   console.log(`===========move dist end=============`)

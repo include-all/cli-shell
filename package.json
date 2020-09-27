@@ -1,6 +1,6 @@
 {
-  "name": "cli-shell",
-  "version": "1.0.0",
+  "name": "cli-shell-deploy",
+  "version": "1.0.6",
   "description": "",
   "main": "index.js",
   "scripts": {
