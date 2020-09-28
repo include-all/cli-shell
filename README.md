@@ -1,11 +1,16 @@
 # cli-shell
 
-npm 和 cli 的测试 repo,脚本更新服务器上的模块
+npm包的repo，实现一个cli工具，用以通过命令自动化部署自己的腾讯云服务器上的服务
+
+## description for npm
 
 This is my first npm package!
 
 It is just for learning.
 
----
+## use in server
+```shell
+npm i cli-shell-deploy -g
 
-用来自动更新自己服务上模块的 cli 工具
+# update module
+cli-shell update-module <moduleName>
