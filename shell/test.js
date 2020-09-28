@@ -1,8 +1,5 @@
-const execa = require('execa'),
-  path = require('path');
-
-
-module.exports = async () => {
+module.exports = async (str) => {
   const projectPath = process.cwd()
+  console.log(str)
   console.log(`exec shell in ${projectPath}`)
 }

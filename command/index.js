@@ -2,18 +2,19 @@
 
 const program = require('commander');
 const test = require("../shell/test")
-const updateMain = require("../shell/updateMain")
-const updateAppVue2 = require("../shell/updateAppVue2")
+const updateModule = require("../shell/update-module")
 
 
 program
   .version('0.1.0')
   .option('-t, --test [test]', 'test')
 
-program.command('test').description("测试命令").action(test)
+program.command('test <str>').description("测试命令").action((str) => test(str))
 
-program.command('updateMain').description("升级main模块").action(updateMain)
-program.command('updateAppVue2').description("升级main模块").action(updateAppVue2)
+program
+  .command('update-module <moduleName>')
+  .description("升级main模块")
+  .action((moduleName) => updateModule(moduleName))
 
 
 // 写这里help才有commands,要写在command后面

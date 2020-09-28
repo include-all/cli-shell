@@ -2,8 +2,28 @@ const execa = require('execa'),
   path = require('path');
 
 
-module.exports = async () => {
-  const projectPath = process.cwd()
+module.exports = async (moduleName) => {
+  if (!['main', 'appVue2', 'appReact'].includes(moduleName)) {
+    console.log('模块名必须为[main][appVue2][appReact]三者中的一个')
+    console.log('请重新输入指令，eg: cli-shell update-module main')
+    return;
+  }
+
+  const targetPathMap = {
+    main: '/home/www/qiankun/main',
+    appVue2: '/home/www/qiankun/subapp/app-vue2',
+    appReact: '/home/www/qiankun/subapp/app-react'
+  }
+
+  const projectPathMap = {
+    main: '/home/git-repositories/fe-qiankun-demo/main',
+    appVue2: '/home/git-repositories/fe-qiankun-demo/app-vue2',
+    appReact: '/home/git-repositories/fe-qiankun-demo/app-react'
+  }
+
+  const targetPath = targetPathMap[moduleName]
+
+  const projectPath = projectPathMap[moduleName]
 
   console.log(`exec shell in ${projectPath}`)
 
@@ -35,7 +55,7 @@ module.exports = async () => {
 
   // 删除dist
   console.log('===========begin delete old source===============')
-  execa.commandSync('rm -rf /home/www/qiankun/main/*', {
+  execa.commandSync(`rm -rf ${targetPath}/*`, {
     cwd: projectPath
   })
   console.log('===========delete old source end===============')
@@ -52,7 +72,7 @@ module.exports = async () => {
 
   // 移动dist文件
   console.log(`===========begin move dist=============`)
-  const cpMainDist = execa.commandSync('cp -rf . /home/www/qiankun/main', {
+  const cpMainDist = execa.commandSync(`cp -rf . ${targetPath}`, {
     cwd: path.join(projectPath, './dist')
   })
   console.log(cpMainDist.stdout)
